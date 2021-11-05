@@ -1,26 +1,110 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {Counter} from "./Counter";
+import {Settings} from "./Settings/Settings";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let [startValue, setStartValue] = useState<number>(0)
+    let [finishValue, setFinishValue] = useState<number>(0)
+    let [counter, setCounter] = useState<number>(startValue)
+    let [error, setError] = useState<string | null>(null)
+    let [enter, setEnter] = useState<string | null>(null)
+    let [disabled, setDisabled] = useState<boolean>(false)
+    let [edit, setEdit] = useState<boolean>(false)
+
+
+
+    useEffect(() => {
+        if (startValue === 0 && finishValue === 0) {
+            setEdit(true)
+            setEnter('enter value and press "set"')
+        }
+
+    },[])
+
+    useEffect(() => {
+
+        if (startValue < 0 || startValue > finishValue || finishValue < 0 || (startValue>0 && finishValue>0 && startValue === finishValue)) {
+            setError('Incorrect value')
+            setEdit(true)
+        } else if (startValue > 0 || startValue < finishValue || finishValue > 0) {
+            setError(null)
+            setEdit(true)
+            setEnter('enter value and press "set"')
+        }
+    },[startValue, finishValue])
+
+    useEffect(() => {
+        let minString = localStorage.getItem('minValue')
+        if (minString) {
+            let minNumber = JSON.parse(minString)
+            setStartValue(minNumber)
+            setCounter(minNumber)
+        }
+        setDisabled(true)
+
+        let maxString = localStorage.getItem('maxValue')
+        if (maxString) {
+            let maxNumber = JSON.parse(maxString)
+            setFinishValue(maxNumber)
+        }
+
+    }, [])
+
+
+    const callBackHandlerForSet = () => {
+        setCounter(startValue)
+        setDisabled(true)
+        setEdit(false)
+        localStorage.setItem("minValue", startValue.toString())
+        localStorage.setItem("maxValue", finishValue.toString())
+    }
+
+    const minInput = (min: number) => {
+        setStartValue(min)
+        setDisabled(false)
+
+    }
+
+    const maxInput = (max: number) => {
+        setFinishValue(max)
+        setDisabled(false)
+
+    }
+
+
+    return (
+        <div className="App">
+            <Settings
+                startValue={startValue}
+                finishValue={finishValue}
+                minInput={minInput}
+                maxInput={maxInput}
+                callBackHandlerForSet={callBackHandlerForSet}
+                disabled={disabled}
+                error={error}
+                setError={setError}
+                setEdit={setEdit}
+            />
+            <Counter
+                value={counter}
+                disabled={disabled}
+                edit={edit}
+                startValue={startValue}
+                finishValue={finishValue}
+                counter={counter}
+                setCounter={setCounter}
+                setError={setError}
+                setEdit={setEdit}
+                error={error}
+                enter={enter}
+                setEnter={setEnter}
+
+            />
+
+        </div>
+    );
 }
 
 export default App;

@@ -1,0 +1,29 @@
+.BoardStart {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.BoardCount {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.BoardError {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.BoardCountMax {
+    color: red;
+    font-size: 18px;
+    font-weight: bold
+}
+
+.Board {
+    width: auto;
+    height: 20px;
+    background-color: aqua;
+}
