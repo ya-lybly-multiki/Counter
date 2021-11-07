@@ -5,13 +5,13 @@ import {Settings} from "./Settings/Settings";
 
 
 function App() {
-    let [startValue, setStartValue] = useState<number>(0)
-    let [finishValue, setFinishValue] = useState<number>(0)
-    let [counter, setCounter] = useState<number>(startValue)
-    let [error, setError] = useState<string | null>(null)
-    let [enter, setEnter] = useState<string | null>(null)
-    let [disabled, setDisabled] = useState<boolean>(false)
-    let [edit, setEdit] = useState<boolean>(false)
+    const [startValue, setStartValue] = useState<number>(0)
+    const [finishValue, setFinishValue] = useState<number>(0)
+    const [counter, setCounter] = useState<number>(startValue)
+    const [error, setError] = useState<string | null>(null)
+    const [enter, setEnter] = useState<string | null>(null)
+    const [disabled, setDisabled] = useState<boolean>(false)
+    const [edit, setEdit] = useState<boolean>(false)
 
 
 

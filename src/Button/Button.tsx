@@ -18,6 +18,6 @@ export function Button (props:PropsType) {
 
 
     return (
-        <button className="btn" onChange={()=>{}} onClick={onClickHandler} disabled={props.disabled}>{props.title}</button>
+        <button className="btn"  onClick={onClickHandler} disabled={props.disabled}>{props.title}</button>
     )
 }
