@@ -1,0 +1,27 @@
+.button {
+    width: 80px;
+    height: 80px;
+    margin: 37px;
+    background: #7f9ee0;
+    border: 2px solid gray;
+    border-radius: 40px;
+    text-decoration: none;
+    color: #4d65c7;
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: 0 10px 0 grey;
+    text-transform: uppercase;
+}
+.button:active {
+    box-shadow: none;
+    position: relative;
+    top: 5px;
+}
+
+.button.disabled {
+    background: gray;
+    color: red;
+    box-shadow: none;
+    position: relative;
+    top: 5px;
+}
